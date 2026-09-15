@@ -1,3 +1,5 @@
+import datetime
+
 from src.masks import get_mask_account, get_mask_card_number
 
 
@@ -31,3 +33,9 @@ def mask_account_card(card: str) -> str:
         result = get_mask_card_number(card_number)
 
     return f"{card_name} {result}"
+
+
+def get_date(date: str) -> str:
+    """Функция, которая возвращает строку с датой в формате 'ДД.ММ.ГГГГ'"""
+    new_date = datetime.fromisoformat(date)
+    return new_date.strftime("%d.%m.%Y")
