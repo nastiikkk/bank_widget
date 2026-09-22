@@ -14,10 +14,10 @@ def test_get_mask_card_number(card_number: str, expected: str) -> None:
     assert get_mask_card_number(card_number) == expected
 
 
-@pytest.mark.parametrize("card_number", [("1234567890"), (""), ("ab1cd3")])
+@pytest.mark.parametrize("card_number", ["1234567890", "", "ab1cd3"])
 def test_get_mask_card_number_invalid(card_number: str) -> None:
     with pytest.raises(ValueError):
-        get_mask_account(card_number)
+        get_mask_card_number(card_number)
 
 
 @pytest.mark.parametrize(
@@ -30,9 +30,9 @@ def test_get_mask_account(card_number: str, expected: str) -> None:
 @pytest.mark.parametrize(
     "card_number",
     [
-        (""),
-        ("ab1cd3"),
-        ("123"),
+        "",
+        "ab1cd3",
+        "123",
     ],
 )
 def test_get_mask_account_invalid(card_number: str) -> None:
