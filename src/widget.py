@@ -6,7 +6,7 @@ from src.masks import get_mask_account, get_mask_card_number
 def mask_account_card(card: str) -> str:
     """Функция, которая возвращает строку с замаскированным номером"""
     if not card:
-        return "введите строку"
+        raise ValueError("Введите строку")
 
     first_num_card = None
     for i in range(len(card)):
@@ -15,19 +15,15 @@ def mask_account_card(card: str) -> str:
             break
 
     if first_num_card is None:
-        return "некорретный ввод"
+        raise ValueError("Некорректный ввод")
 
     card_name = card[:first_num_card].strip()
     card_number = card[first_num_card:].strip()
 
-    if not card_number.isdigit():
-        return "некорретный ввод"
+    if not card_number.isdigit() or len(card_name) == 0:
+        raise ValueError("Некорректный ввод")
 
-    is_account = False
     if "Счет" in card:
-        is_account = True
-
-    if is_account:
         result = get_mask_account(card_number)
     else:
         result = get_mask_card_number(card_number)
