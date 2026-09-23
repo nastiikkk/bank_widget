@@ -2,11 +2,11 @@ from typing import Generator
 
 
 def filter_by_currency(
-    transactions: list[dict], code: str
+    transactions: list[dict], currency_code: str
 ) -> Generator[dict, None, None]:
     """Возвращает транзакции только с указанной валютой"""
     for transaction in transactions:
-        if transaction["operationAmount"]["currency"]["code"] == code:
+        if transaction["operationAmount"]["currency"]["code"] == currency_code:
             yield transaction
 
 
