@@ -50,7 +50,9 @@ def transactions() -> list[dict]:
     "currency_code, expected_id",
     [("USD", [939719570, 643487541]), ("RUB", [142264268]), ("THB", [])],
 )
-def test_filter_by_currency(transactions: list[dict], currency_code: str, expected_id: list[int]) -> None:
+def test_filter_by_currency(
+    transactions: list[dict], currency_code: str, expected_id: list[int]
+) -> None:
     result = list(filter_by_currency(transactions, currency_code))
     result_ids = [transaction["id"] for transaction in result]
     assert result_ids == expected_id
@@ -65,7 +67,9 @@ def test_filter_by_currency_no_transactions() -> None:
     "expected_description",
     [["Перевод организации", "Перевод со счета на счет", "Перевод с карты на карту"]],
 )
-def test_transaction_descriptions(transactions: list[dict], expected_description: list[str]) -> None:
+def test_transaction_descriptions(
+    transactions: list[dict], expected_description: list[str]
+) -> None:
     result = list(transaction_descriptions(transactions))
     assert result == expected_description
 
@@ -84,6 +88,8 @@ def test_transaction_descriptions_empty() -> None:
         (134, 133, []),
     ],
 )
-def test_card_number_generator(start: int, stop: int, expected_card_numbers: list[str]) -> None:
+def test_card_number_generator(
+    start: int, stop: int, expected_card_numbers: list[str]
+) -> None:
     result = list(card_number_generator(start, stop))
     assert result == expected_card_numbers
