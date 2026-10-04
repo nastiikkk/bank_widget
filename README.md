@@ -125,28 +125,102 @@ from src.widget import get_date
 print(get_date("2019-07-03T18:35:29.512364"))
 ```
 
-
-## Тестирование
-
-Для проверки проекта используются тесты на базе pytest.
-
-Тестами проверяются:
-
-* функции маскировки номеров банковских карт и счетов
-* обработка корректных и некорректных данных
-* преобразование дат
-* фильтрация операций по состоянию
-* сортировка операций по дате в прямом и обратном порядке
-
-Для запуска тестов используется команда:
-
+Результат:
 ```
-poetry run pytest
+03.07.2019
 ```
 
-Для формирования HTML-отчета о покрытии:
+## Модуль generators
+
+Модуль generators содержит генераторы для работы с транзакциями и номерами банковских карт.
+
+### filter_by_currency
+
+Возвращает транзакции только с указанной валютой.
+
+Пример:
+
+```python
+from src.generators import filter_by_currency
+
+transactions = [
+    {
+        "id": 1,
+        "operationAmount": {
+            "currency": {
+                "code": "USD"
+            }
+        }
+    },
+    {
+        "id": 2,
+        "operationAmount": {
+            "currency": {
+                "code": "RUB"
+            }
+        }
+    }
+]
+
+usd_transactions = filter_by_currency(transactions, "USD")
+
+for transaction in usd_transactions:
+    print(transaction)
+```
+
+Результат:
+```
+{
+    "id": 1,
+    "operationAmount": {
+        "currency": {
+            "code": "USD"
+        }
+    }
+}
+```
+
+### transaction_descriptions
+
+Возвращает описания операций из списка транзакций.
+
+Пример:
+
+```python
+from src.generators import transaction_descriptions
+
+descriptions = transaction_descriptions(transactions)
+
+for description in descriptions:
+    print(description)
+```
+
+Результат:
+```
+Перевод организации
+Перевод со счета на счет
+Перевод с карты на карту
+```
+
+### card_number_generator
+
+Генерирует номера банковских карт в заданном диапазоне.
+
+Пример:
+
+```python
+from src.generators import card_number_generator
+
+cards = card_number_generator(1, 3)
+
+for card in cards:
+    print(card)
 
 ```
-poetry run pytest --cov=src --cov-report=html
-```
 
+Результат:
+```
+0000 0000 0000 0001
+0000 0000 0000 0002
+0000 0000 0000 0003
+```
