@@ -224,3 +224,77 @@ for card in cards:
 0000 0000 0000 0002
 0000 0000 0000 0003
 ```
+
+### Декоратор `log`
+
+Записывает информацию о выполнении функции и возникающих ошибках.
+
+Декоратор принимает необязательный параметр `filename`.
+
+Если `filename` не указан, сообщение выводится в консоль.
+
+Если `filename` указан, сообщение записывается в файл.
+
+### Успешное выполнение
+
+```python
+@log()
+def my_function(x, y):
+    return x + y
+
+my_function(1, 2)
+```
+
+В консоли появится:
+
+```
+my_function ok
+```
+
+### Ошибка
+
+```python
+@log()
+def my_function(x, y):
+    return x / y
+
+my_function(1, 0)
+```
+
+В консоли появится:
+
+```
+my_function error: division by zero. Inputs: (1, 0), {}
+```
+
+### Запись в файл
+
+```python
+@log(filename="mylog.txt")
+def my_function(x, y):
+    return x + y
+
+my_function(1, 2)
+```
+
+В файл `mylog.txt` будет записано:
+
+```
+my_function ok
+```
+
+### Тестирование
+
+Для проверки работы декоратора используются тесты `pytest`.
+
+Запуск тестов:
+
+```
+pytest
+```
+
+Для проверки покрытия кода:
+
+```
+pytest --cov=src
+```
