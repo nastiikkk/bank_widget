@@ -27,4 +27,4 @@ def convert_to_rubles(amount: float, currency_code: str) -> float:
 
     response = response.json()
     new_amount = response["result"]
-    return new_amount
+    return float(new_amount)
