@@ -9,5 +9,7 @@ def get_transactions(path: str) -> list[dict]:
             if isinstance(data, list):
                 return data
             return []
-    except FileNotFoundError, json.JSONDecodeError:
+    except FileNotFoundError:
+        return []
+    except json.JSONDecodeError:
         return []
