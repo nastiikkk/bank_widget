@@ -1,11 +1,5 @@
-import json
 import re
 from collections import Counter
-from pathlib import Path
-
-path = Path(__file__).resolve().parent.parent / "data" / "operations.json"
-with open(path, "r", encoding="utf-8") as data:
-    data = json.load(data)
 
 
 def process_bank_search(data: list[dict], search: str) -> list[dict]:
