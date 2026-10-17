@@ -327,3 +327,44 @@ transactions = read_excel_file("data/transactions.xlsx")
 
 print(transactions)
 ```
+
+### process_bank_search
+
+Ищет финансовые операции по ключевому слову в описании.
+
+Пример:
+
+```python
+from src.search_by_description import process_bank_search
+
+transactions = [
+    {"description": "Перевод организации"},
+    {"description": "Открытие вклада"},
+]
+
+result = process_bank_search(transactions, "перевод")
+
+print(result)
+```
+
+### `process_bank_operations`
+
+Подсчитывает количество совпадений описаний финансовых операций с переданными категориями и возвращает словарь с результатами.
+
+Пример:
+
+```python
+from src.operations import process_bank_operations
+
+transactions = [
+    {"description": "Перевод организации"},
+    {"description": "Открытие вклада"},
+    {"description": "Перевод организации"},
+]
+
+categories = ["перевод", "вклад"]
+
+result = process_bank_operations(transactions, categories)
+
+print(result)
+```
