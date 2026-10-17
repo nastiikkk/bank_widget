@@ -7,7 +7,7 @@ def filter_by_state(data: list[dict], state: str = "EXECUTED") -> list[dict]:
     result = []
 
     for i in data:
-        if i["state"] == state:
+        if i.get("state", "") == state:
             result.append(i)
 
     return result

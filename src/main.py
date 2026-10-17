@@ -1,22 +1,23 @@
-from src.file_readers import read_csv_file, read_excel_file
-from src.utils import get_transactions
-from src.search_by_description import process_bank_search
-from src.generators import filter_by_currency, transaction_descriptions
-from src.processing import filter_by_state, sort_by_date
-from src.widget import get_date
-from src.masks import get_mask_account, get_mask_card_number
-from src.external_api import get_transaction_amount
 from pathlib import Path
 
+from src.external_api import get_transaction_amount
+from src.file_readers import read_csv_file, read_excel_file
+from src.generators import filter_by_currency, transaction_descriptions
+from src.masks import get_mask_account, get_mask_card_number
+from src.processing import filter_by_state, sort_by_date
+from src.search_by_description import process_bank_search
+from src.utils import get_transactions
+from src.widget import get_date
 
 base_path = Path(__file__).resolve().parent.parent
+
 
 def main():
     file_type = greeting()
     file_paths = {
-        1: (base_path /"data" / "transactions.json", get_transactions),
-        2: (base_path /"data" / "transactions.csv", read_csv_file),
-        3: (base_path /"data" / "transactions.xlsx", read_excel_file)
+        1: (base_path / "data" / "transactions.json", get_transactions),
+        2: (base_path / "data" / "transactions.csv", read_csv_file),
+        3: (base_path / "data" / "transactions.xlsx", read_excel_file),
     }
     path, func = file_paths[file_type]
     transactions = func(path)
@@ -29,12 +30,13 @@ def main():
         transactions = sort_by_date(transactions, not ascending)
 
     if rubles_only:
-        transactions = list(filter_by_currency(transactions, 'RUB'))
+        transactions = list(filter_by_currency(transactions, "RUB"))
 
     if search_description:
         transactions = process_bank_search(transactions, search_word)
 
     print_transactions(transactions)
+
 
 def greeting() -> int:
     print(
@@ -79,18 +81,19 @@ def how_sort() -> list:
     settings = []
     print("Отсортировать операции по дате? Да/Нет")
     answer1 = input().lower().strip()
-    settings.append(True if answer1=='да' else False)
-    if answer1 == 'да':
+    settings.append(True if answer1 == "да" else False)
+    if answer1 == "да":
         print("Отсортировать по возрастанию или по убыванию? ")
         answer2 = input().lower().strip()
-        settings.append(True if answer2 == 'по возрастанию' else False)
-    else: settings.append(False)
+        settings.append(True if answer2 == "по возрастанию" else False)
+    else:
+        settings.append(False)
     print("Выводить только рублевые транзакции? Да/Нет")
     answer3 = input().lower().strip()
-    settings.append(True if answer3 == 'да' else False)
+    settings.append(True if answer3 == "да" else False)
     print("Отфильтровать список транзакций по определенному слову в описании? Да/Нет")
     answer4 = input().lower().strip()
-    if answer4 == 'да':
+    if answer4 == "да":
         search_word = input("Введите слово для поиска в описании транзакций\n")
         settings.append(True)
         settings.append(search_word)
@@ -135,7 +138,7 @@ def get_transaction_info(transaction: dict, descriptions) -> dict:
         "description": transaction_description,
         "from": f"{' '.join(transaction_info_name_from)} {masked_transaction_from}".strip(),
         "to": f"{' '.join(transaction_info_name_to)} {masked_transaction_to}".strip(),
-        "amount": transaction_amount
+        "amount": transaction_amount,
     }
 
 
@@ -153,12 +156,14 @@ def print_transactions(transactions: list[dict]):
                 print(f"{transaction_info['from']} -> {transaction_info['to']}")
             else:
                 print(transaction_info["to"])
-            print(f"Сумма: {transaction_info["amount"]} {transaction["operationAmount"]["currency"]["code"]}")
+            print(
+                f"Сумма: {transaction_info["amount"]} {transaction["operationAmount"]["currency"]["code"]}"
+            )
             print()
 
     else:
         print("Не найдено ни одной транзакции, подходящей под ваши условия фильтрации")
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

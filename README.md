@@ -309,7 +309,7 @@ pytest --cov=src
 ```python
 from src.file_readers import read_csv_file
 
-transactions = read_csv_file("transactions.csv")
+transactions = read_csv_file("data/transactions.csv")
 
 print(transactions)
 ```
@@ -323,7 +323,7 @@ print(transactions)
 ```python
 from src.file_readers import read_excel_file
 
-transactions = read_excel_file("transactions_excel.xlsx")
+transactions = read_excel_file("data/transactions_excel.xlsx")
 
 print(transactions)
 ```
