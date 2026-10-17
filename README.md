@@ -323,7 +323,7 @@ print(transactions)
 ```python
 from src.file_readers import read_excel_file
 
-transactions = read_excel_file("data/transactions_excel.xlsx")
+transactions = read_excel_file("data/transactions.xlsx")
 
 print(transactions)
 ```

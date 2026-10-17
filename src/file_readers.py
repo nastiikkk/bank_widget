@@ -3,7 +3,7 @@ import pandas as pd
 
 def read_csv_file(path_to_csv: str) -> list[dict]:
     """Считывает финансовые операции из CSV-файла"""
-    df = pd.read_csv(path_to_csv, delimiter=";")
+    df = pd.read_csv(path_to_csv)
     return df.to_dict(orient="records")
 
 

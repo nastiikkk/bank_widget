@@ -39,6 +39,7 @@ def main():
 
 
 def greeting() -> int:
+    """"""
     print(
         "Привет! Добро пожаловать в программу работы "
         "с банковскими транзакциями.\n"
@@ -58,6 +59,7 @@ def greeting() -> int:
 
 
 def get_status() -> str:
+    """"""
     start_message = [
         "Введите статус, по которому необходимо выполнить фильтрацию.",
         "Доступные для фильтровки статусы: EXECUTED, CANCELED, PENDING",
@@ -78,6 +80,7 @@ def get_status() -> str:
 
 
 def how_sort() -> list:
+    """"""
     settings = []
     print("Отсортировать операции по дате? Да/Нет")
     answer1 = input().lower().strip()
@@ -105,6 +108,7 @@ def how_sort() -> list:
 
 
 def get_transaction_info(transaction: dict, descriptions) -> dict:
+    """"""
     new_date = get_date(transaction["date"])
 
     transaction_description = next(descriptions)
@@ -143,6 +147,7 @@ def get_transaction_info(transaction: dict, descriptions) -> dict:
 
 
 def print_transactions(transactions: list[dict]):
+    """"""
     print("Распечатываю итоговый список транзакций...\n")
     if len(transactions) > 0:
         print(f"Всего банковских операций в выборке: {len(transactions)}\n")
