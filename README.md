@@ -298,3 +298,32 @@ pytest
 ```
 pytest --cov=src
 ```
+
+
+### read_csv_file
+
+Считывает финансовые операции из CSV-файла и возвращает список словарей.
+
+Пример:
+
+```python
+from src.file_readers import read_csv_file
+
+transactions = read_csv_file("transactions.csv")
+
+print(transactions)
+```
+
+### read_excel_file
+
+Считывает финансовые операции из Excel-файла (.xlsx) и возвращает список словарей.
+
+Пример:
+
+```python
+from src.file_readers import read_excel_file
+
+transactions = read_excel_file("transactions_excel.xlsx")
+
+print(transactions)
+```
