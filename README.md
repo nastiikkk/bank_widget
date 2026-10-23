@@ -1,4 +1,4 @@
-# Bank Project
+# Bank Widget
 
 ## Описание 
 
